@@ -1,0 +1,49 @@
+# XIRPG: builds the Windows launcher (XIRPG.exe) and the player zip on GitHub's Windows machines, so no build tools
+# are needed on your own PC.
+#
+# Runs on every push to the xirpg or main branch, and by hand: Actions > Windows build > Run workflow.
+# The result is on the run's page under Artifacts:
+#   XIRPG-windows   the player zip (unzip it anywhere and run XIRPG.exe) and its SHA256SUMS.txt
+# This only builds; it does not make a GitHub release. Releases are still made as RELEASING.md says.
+
+name: Windows build
+
+on:
+  push:
+    branches: [xirpg, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  launcher:
+    runs-on: windows-latest
+    env:
+      VERSION: v0.1.34-xirpg.${{ github.run_number }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build XIRPG.exe (also runs the personality tests through the exe)
+        shell: pwsh
+        run: .\build_release.ps1
+
+      - name: Check the exe is there
+        shell: pwsh
+        run: |
+          if (-not (Test-Path .\XIRPG.exe)) { throw "XIRPG.exe was not built" }
+          Get-Item .\XIRPG.exe | Format-List Name, Length
+
+      - name: Pack the player zip
+        shell: pwsh
+        run: python package_kit.py $env:VERSION
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: XIRPG-windows
+          path: dist/kit/
+          if-no-files-found: error
