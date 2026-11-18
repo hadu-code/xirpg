@@ -11,12 +11,12 @@ import subprocess
 import sys
 import urllib.request
 
-KIT_REPO = "Hurami89/xi-forever-offline"
-SERVER_REPO = "Hurami89/xi-forever-offline-server"
+KIT_REPO = "hadu-code/xirpg"
+SERVER_REPO = "hadu-code/xirpg-server"
 API = "https://api.github.com/repos/"
 UPLOADS = "https://uploads.github.com/repos/"
 # The one-click download (Discord, website): GitHub always serves the newest full release's file under this name at
-# https://github.com/Hurami89/xi-forever-offline/releases/latest/download/XIRPG.zip
+# https://github.com/hadu-code/xirpg/releases/latest/download/XIRPG.zip
 ONE_CLICK_NAME = "XIRPG.zip"
 ONE_CLICK_URL = f"https://github.com/{KIT_REPO}/releases/latest/download/{ONE_CLICK_NAME}"
 NO_WINDOW = 0x08000000 if os.name == "nt" else 0

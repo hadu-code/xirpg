@@ -17,10 +17,11 @@ import sys
 import time
 import zipfile
 
-# XIRPG is a fork of XI: Forever Offline (Hurami89/xi-forever-offline). The kit has no release repository of
-# its own yet, so kit updates are off: set this to "<your GitHub name>/<your kit repo>" once you publish releases there.
-# (Left pointing at the original, the launcher would offer to replace this fork with the original kit.)
-KIT_REPO = ""
+# XIRPG is a fork of XI: Forever Offline (Hurami89/xi-forever-offline). Kit updates come from the fork's own releases;
+# until one is published there, the check finds nothing and offers nothing.
+KIT_REPO = "hadu-code/xirpg"
+# The prebuilt server still comes from the original project (also in thirdparty.json). Change both to
+# "hadu-code/xirpg-server" once that repository has a server release of its own, or first-run setup has nothing to download.
 SERVER_REPO = "Hurami89/xi-forever-offline-server"
 # XIFO_TEST_PLATFORM=windows: the stand-in tests check the Windows paths on a Linux machine
 IS_WINDOWS = os.name == "nt" or os.environ.get("XIFO_TEST_PLATFORM") == "windows"
