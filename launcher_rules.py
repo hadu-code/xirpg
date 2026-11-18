@@ -15,7 +15,7 @@ import re
 JOB_ORDER = ["WAR", "MNK", "WHM", "BLM", "RDM", "THF", "PLD", "DRK", "BST", "BRD", "RNG", "SAM", "NIN", "DRG", "SMN"]
 PARTS = ["ja", "magic"]
 PART_LABELS = {"ja": "Job abilities", "magic": "Spells and ranged attacks"}
-MARKER = "-- Written by the XI: Forever Offline launcher (Squad tab > Edit job rules). It is rewritten when you save there."
+MARKER = "-- Written by the XIRPG launcher (Squad tab > Edit job rules). It is rewritten when you save there."
 
 TARGETS = ["SELF", "PARTY", "MASTER", "TARGET", "TRIGGER_SELF_ACTION_TARGET"]
 TARGET_LABELS = {"SELF": "itself", "PARTY": "a party member", "MASTER": "you", "TARGET": "the enemy",

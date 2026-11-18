@@ -31,7 +31,7 @@ return {
     ['SAGA3 DX'] = { name = 'Final Fantasy Legend III', playtime_hours = 15 },
     ['SAGA3']    = { name = 'Final Fantasy Legend III', playtime_hours = 15 },
 
-    -- The free games that come with XI: Forever Offline (crystalboy-games\CREDITS.md). Times are a first playthrough.
+    -- The free games that come with XIRPG (crystalboy-games\CREDITS.md). Times are a first playthrough.
     ['AEVILIA']  = { name = 'Aevilia',  playtime_hours = 1 },    -- a short RPG demo
     ['AIRAKI1']  = { name = 'Airaki!',  playtime_hours = 1 },    -- eight battles against harder and harder foes, no saves
     ['LABIRYNT'] = { name = 'Labirinth', playtime_hours = 2 },   -- seven good deeds on easy, ten and more on hard

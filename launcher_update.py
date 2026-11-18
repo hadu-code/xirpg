@@ -1,4 +1,4 @@
-"""Updates for players: is there a newer XI: Forever Offline, and install it (no GUI code here).
+"""Updates for players: is there a newer XIRPG, and install it (no GUI code here).
 
 The kit (launcher, scripts, addons) and the server are released separately on GitHub. Installing a kit update unpacks
 the player zip over the kit folder (only files that come in the zip are replaced, so config.json, rates.json, your squad
@@ -17,7 +17,10 @@ import sys
 import time
 import zipfile
 
-KIT_REPO = "Hurami89/xi-forever-offline"
+# XIRPG is a fork of XI: Forever Offline (Hurami89/xi-forever-offline). The kit has no release repository of
+# its own yet, so kit updates are off: set this to "<your GitHub name>/<your kit repo>" once you publish releases there.
+# (Left pointing at the original, the launcher would offer to replace this fork with the original kit.)
+KIT_REPO = ""
 SERVER_REPO = "Hurami89/xi-forever-offline-server"
 # XIFO_TEST_PLATFORM=windows: the stand-in tests check the Windows paths on a Linux machine
 IS_WINDOWS = os.name == "nt" or os.environ.get("XIFO_TEST_PLATFORM") == "windows"
@@ -65,7 +68,7 @@ def check(kit, server, test_builds, fetch):
     out = {}
     for key, repo, folder in (("kit", KIT_REPO, kit), ("server", SERVER_REPO, server)):
         have = installed_version(folder) if folder else None
-        release = newest_release(repo, test_builds, fetch)
+        release = newest_release(repo, test_builds, fetch) if repo else None      # no repository set: nothing to check
         tag = release.get("tag_name") if release else None
         out[key] = {"installed": have, "newest": tag, "notes": (release or {}).get("body", ""), "release": release,
                     "newer": bool(tag and have and version_key(tag) > version_key(have))}
@@ -159,7 +162,7 @@ def _unpack(zip_path, dest, keep=(), log=print, running_exe=None):
 
 
 def cleanup_old_exes(kit):
-    """Deletes the launcher copies an update moved aside (XI Forever Offline.old.exe, .old-<time>.exe). Called when the
+    """Deletes the launcher copies an update moved aside (XIRPG.old.exe, .old-<time>.exe). Called when the
     launcher starts (the old one has closed by then) and before an update. One still running is left for next time."""
     running = os.path.normcase(os.path.abspath(sys.executable)) if getattr(sys, "frozen", False) else None
     removed = 0

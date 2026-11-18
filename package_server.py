@@ -175,7 +175,7 @@ def main(argv):
     commit = git(server, "rev-parse", "HEAD").strip()
     os.makedirs(args.out, exist_ok=True)
     folder = f"xi-forever-offline-server-{args.version}/"
-    version_text = f"XI: Forever Offline server {args.version}\ncommit {commit}\n"
+    version_text = f"XIRPG server {args.version}\ncommit {commit}\n"
     if args.platform == "linux":
         name = f"xi-forever-offline-server-{args.version}-linux-x64.tar.gz"
         target = os.path.join(args.out, name)

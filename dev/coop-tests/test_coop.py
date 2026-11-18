@@ -140,8 +140,8 @@ class Plain(unittest.TestCase):
         self.assertEqual(co.suggest_address("lan", []), "")
 
     def test_firewall(self):
-        script = co.firewall_script(r"C:\XI Forever Offline\server", 54100, "tailscale")
-        for piece in (r"'C:\XI Forever Offline\server\xi_map.exe'", "-RemoteAddress 100.64.0.0/10", "-LocalPort 54100", co.FIREWALL_RULE):
+        script = co.firewall_script(r"C:\XIRPG\server", 54100, "tailscale")
+        for piece in (r"'C:\XIRPG\server\xi_map.exe'", "-RemoteAddress 100.64.0.0/10", "-LocalPort 54100", co.FIREWALL_RULE):
             self.assertIn(piece, script)
         self.assertIn("LocalSubnet", co.firewall_script("C:\\s", 54100, "lan"))
 
@@ -500,11 +500,11 @@ class TwoLaunchers(unittest.TestCase):
         self.settings["hosting"] = True
         for folder, version in ((self.server, "v0.1.30"), ):
             with open(os.path.join(folder, "VERSION.txt"), "w") as handle:
-                handle.write(f"XI: Forever Offline server {version}\n")
+                handle.write(f"XIRPG server {version}\n")
         mine = os.path.join(self.tmp, "myserver")
         os.makedirs(mine)
         with open(os.path.join(mine, "VERSION.txt"), "w") as handle:
-            handle.write("XI: Forever Offline server v0.1.29\n")
+            handle.write("XIRPG server v0.1.29\n")
         with self.assertRaises(co.Refused) as stop:
             co.start_visit({"server_dir": mine}, self.kit_home, self.invite, CHAR, **self.kw())
         self.assertEqual(stop.exception.code, "version")

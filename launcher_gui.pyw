@@ -1,4 +1,4 @@
-"""XI: Forever Offline launcher - one window: Home (Play, Stop, Dualbox), squad, config, tools, settings."""
+"""XIRPG launcher - one window: Home (Play, Stop, Dualbox), squad, config, tools, settings."""
 import ctypes, os, queue, random, subprocess, sys, threading, time, traceback
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog, filedialog
@@ -225,7 +225,7 @@ def elevate_and_exit():
     if isinstance(result, int) and result > 32:
         sys.exit(0)                                       # the administrator copy is starting
     # Refused (No on Windows' prompt) or no prompt available: say so instead of closing without a word.
-    text = ("XI: Forever Offline needs to run as administrator (it starts the game server and points PlayOnline at "
+    text = ("XIRPG needs to run as administrator (it starts the game server and points PlayOnline at "
             "the game it uses), but Windows' permission prompt was refused or could not be shown "
             f"(code {result}).\n\nStart it again and choose Yes, or right-click it and pick 'Run as administrator'.")
     try:
@@ -235,7 +235,7 @@ def elevate_and_exit():
     except OSError:
         pass
     try:
-        messagebox.showerror("XI: Forever Offline", text)
+        messagebox.showerror("XIRPG", text)
     except Exception:
         pass
     sys.exit(1)
@@ -257,7 +257,7 @@ class CheckList(tk.Frame):
     """The addons or plugins of one Ashita window, like other private-server launchers list them: a switch, the name,
     version and author, where it comes from, and what it does. Switching one adds/removes its load line right away."""
 
-    TAG_COLORS = {"XI: Forever Offline": GOLD, "download": ACCENT, "added by you": GREEN, "Ashita": DIM}
+    TAG_COLORS = {"XIRPG": GOLD, "download": ACCENT, "added by you": GREEN, "Ashita": DIM}
 
     def __init__(self, parent, kind, scripts):
         super().__init__(parent, bg=BG)
@@ -1988,7 +1988,7 @@ class UpdatesTab(tk.Frame):
         frame.pack(fill="x", padx=14, pady=6)
         deck = linux.is_steam_deck()
         tk.Label(frame, text="Steam Deck" if deck else "Linux", bg=PANEL, fg=FG, font=(UI_FONT, 12, "bold")).pack(anchor="w", padx=12, pady=(10, 2))
-        tk.Label(frame, text=("Add XI: Forever Offline to your application menu, then to Steam (Steam's Add a Non-Steam Game list shows it), "
+        tk.Label(frame, text=("Add XIRPG to your application menu, then to Steam (Steam's Add a Non-Steam Game list shows it), "
                               "so you can start it from Game Mode with the controller. The game runs through Proton, which the "
                               "launcher keeps inside its own folder."),
                  bg=PANEL, fg=DIM, wraplength=880, justify="left", font=(UI_FONT, 9)).pack(anchor="w", padx=12, pady=(0, 8))
@@ -2009,10 +2009,10 @@ class UpdatesTab(tk.Frame):
             messagebox.showerror("Add to Steam", f"Could not add the menu entry: {e}", parent=self)
             return
         opened = linux.open_steam_add_game()
-        messagebox.showinfo("Add to Steam", "XI: Forever Offline is in your application menu now" +
+        messagebox.showinfo("Add to Steam", "XIRPG is in your application menu now" +
                             (" and on your desktop" if os.path.isdir(os.path.expanduser("~/Desktop")) else "") + ".\n\n" +
-                            ("In Steam's window that opened, tick XI: Forever Offline and press Add Selected Programs."
-                             if opened else "In Steam: Games > Add a Non-Steam Game to My Library, tick XI: Forever Offline, "
+                            ("In Steam's window that opened, tick XIRPG and press Add Selected Programs."
+                             if opened else "In Steam: Games > Add a Non-Steam Game to My Library, tick XIRPG, "
                                             "then Add Selected Programs.") +
                             "\n\nIn Game Mode, start it from your library like any game.\n\n(" + path + ")", parent=self)
 
@@ -2103,7 +2103,7 @@ class UpdatesTab(tk.Frame):
         info = self.update_info
         newest = max((info[k]["newest"] for k in ("kit", "server") if info[k]["newer"]), key=lambda t: t or "")
         notes = next((info[k]["notes"] for k in ("kit", "server") if info[k]["newer"] and info[k]["notes"]), "")
-        if messagebox.askyesno("Update available", f"XI: Forever Offline {newest} is out.\n\n{notes[:900]}\n\nUpdate now? "
+        if messagebox.askyesno("Update available", f"XIRPG {newest} is out.\n\n{notes[:900]}\n\nUpdate now? "
                                "Your settings, characters and squad mates are kept, and your database is saved first."):
             self.player_update()
 
@@ -2290,7 +2290,7 @@ class PublishDialog(tk.Toplevel):
             return
         kind = "a test build" if self.prerelease.get() else "a full release (every player is offered it)"
         if not messagebox.askyesno("Publish", f"Publish {version} as {kind}?\n\nThis will:\n"
-                                   "1. build XI Forever Offline.exe\n2. make the server and player zips\n"
+                                   "1. build XIRPG.exe\n2. make the server and player zips\n"
                                    f"3. tag both repos {version} and push the tags and the server's release branch\n"
                                    "4. create both GitHub releases and upload the files\n\nIt takes a while (the server zip is ~400 MB).",
                                    parent=self):
@@ -2334,7 +2334,7 @@ def one_launcher_only_linux():
         root = tk.Tk()
         root.withdraw()
         close_other = messagebox.askyesno(
-            "XI: Forever Offline",
+            "XIRPG",
             "The launcher is already open (it may be behind other windows, or still closing).\n\n"
             "Yes = close the other one and its servers, and open this one.\nNo = keep the other one.", parent=root)
         root.destroy()
@@ -2357,7 +2357,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         linux_look(self)
-        self.title("XI: Forever Offline")
+        self.title("XIRPG")
         self.geometry("980x770")
         self.minsize(900, 420)          # the Play page is compact; the other pages set the taller window themselves
         self.configure(bg=BG)
@@ -2474,7 +2474,7 @@ class App(tk.Tk):
             self._images.append(banner)
             self.banner_label.configure(image=banner)
         else:
-            self.banner_label.configure(text="XI: FOREVER OFFLINE", fg=FG, font=("Georgia", 30, "bold"))
+            self.banner_label.configure(text="XIRPG", fg=FG, font=("Georgia", 30, "bold"))
         self.pictures = load_gallery() + self.heroes
         self._images.extend(g for g in self.pictures if g not in self._images)
         self.picture_index = 0
@@ -3085,7 +3085,7 @@ class App(tk.Tk):
                                     "on the Windows PC (PlayOnline), copy its SquareEnix folder over this one again, "
                                     "then press PLAY.", parent=self)
                 return False
-            if messagebox.askyesno("Update your game copy", f"XI: Forever Offline's copy of FINAL FANTASY XI is the {have} "
+            if messagebox.askyesno("Update your game copy", f"XIRPG's copy of FINAL FANTASY XI is the {have} "
                                    f"version, older than the {need} update the server needs (older games crash opening "
                                    "Equipment and can freeze at some NPCs).\n\nUpdate the game on the Windows PC "
                                    "(PlayOnline), copy its SquareEnix folder here again, then choose it: only changed files "
@@ -3100,7 +3100,7 @@ class App(tk.Tk):
                     messagebox.showinfo("Update your game copy", "That folder doesn't have FINAL FANTASY XI in it.", parent=self)
             return False
         if info.get("retail_ok"):
-            if messagebox.askyesno("Update your game copy", f"XI: Forever Offline's copy of FINAL FANTASY XI is the {have} "
+            if messagebox.askyesno("Update your game copy", f"XIRPG's copy of FINAL FANTASY XI is the {have} "
                                    f"version, older than the {need} update the server needs (older games crash opening "
                                    f"Equipment and can freeze at some NPCs).\n\nYour regular FFXI is newer "
                                    f"({lg.build_text(info['retail_build'])}). Update the copy from it now? Only changed "
@@ -3108,7 +3108,7 @@ class App(tk.Tk):
                 self.refresh_game_copy(info["retail"])
                 return True
             return False
-        where = "XI: Forever Offline's copy of FINAL FANTASY XI" if info.get("copy") else "Your FINAL FANTASY XI"
+        where = "XIRPG's copy of FINAL FANTASY XI" if info.get("copy") else "Your FINAL FANTASY XI"
         if messagebox.askyesno("Update FINAL FANTASY XI", f"{where} is the {have} version, older than the {need} update "
                                f"the server needs (older games crash opening Equipment and can freeze at some NPCs)."
                                f"\n\nTo update: open PlayOnline, log in with your Square Enix account, start FINAL FANTASY "
@@ -3394,7 +3394,7 @@ class App(tk.Tk):
         if cfg.get("game_copy"):     # our own copy of the game: point PlayOnline at it until every game window closes
             import launcher_game as lg
             if lg.start_switch(HERE, cfg, run_elevated, is_running=lambda: core.is_running("xiloader")):
-                self.say("Pointed PlayOnline at XI: Forever Offline's copy of the game (put back when the game closes).")
+                self.say("Pointed PlayOnline at XIRPG's copy of the game (put back when the game closes).")
         subprocess.Popen([cli, boot], cwd=self.ashita, stdout=alog,
                          stderr=subprocess.STDOUT, creationflags=core.NO_WINDOW)
         for _ in range(60):
@@ -3875,7 +3875,7 @@ class SetupWizard(tk.Tk):
         linux_look(self)
         import launcher_setup
         self.setup = launcher_setup
-        self.title("XI: Forever Offline - first-time setup")
+        self.title("XIRPG - first-time setup")
         self.geometry("760x600")
         self.configure(bg=BG)
         icon = load_image(os.path.join("ui", "icon.png"))
@@ -3904,7 +3904,7 @@ class SetupWizard(tk.Tk):
         self.password = tk.StringVar(value=launcher_setup.new_password(12))
         self.mariadb_dir = layout["mariadb_dir"]
 
-        tk.Label(self, text="XI: Forever Offline", bg=BG, fg=GOLD, font=("Georgia", 20, "bold")).pack(anchor="w", padx=16, pady=(14, 0))
+        tk.Label(self, text="XIRPG", bg=BG, fg=GOLD, font=("Georgia", 20, "bold")).pack(anchor="w", padx=16, pady=(14, 0))
         self.step_title = tk.Label(self, text="", bg=BG, fg=FG, font=(UI_FONT, 12, "bold"))
         self.step_title.pack(anchor="w", padx=16, pady=(2, 8))
         self.body = tk.Frame(self, bg=BG)
@@ -3945,7 +3945,7 @@ class SetupWizard(tk.Tk):
                   "with PlayOnlineViewer and FINAL FANTASY XI in it) to a USB stick or this machine, then choose it below. "
                   "Update the game on the Windows PC first (PlayOnline, once).", fg=FG)
         for key, label, about in (
-                ("copy", "Copy the game into XI: Forever Offline's folder (recommended)",
+                ("copy", "Copy the game into XIRPG's folder (recommended)",
                  "The folder you choose stays as it is (a USB stick can be unplugged afterwards). Needs about 16 GB free."),
                 ("existing", "Use the game where it is",
                  "No copy: the era game files (Phoenix Era-DATs) go into that folder; its original files are backed up.")):
@@ -3966,7 +3966,7 @@ class SetupWizard(tk.Tk):
         self.text("This sets up everything on this PC: the game files, the game add-on loader (Ashita), the game server and a "
                   "small database. It takes a while and needs an internet connection for the downloads.")
         found = bool(self.setup.valid_ffxi(self.ffxi.get()))
-        options = [("copy", "Make a separate copy of my FINAL FANTASY XI for XI: Forever Offline (recommended)",
+        options = [("copy", "Make a separate copy of my FINAL FANTASY XI for XIRPG (recommended)",
                     "Your own install (retail, other servers, HD packs) stays exactly as it is. Needs as much free space as "
                     "your FFXI install uses. On PLAY, Windows asks once for permission to point PlayOnline at the copy; "
                     "it is put back when the game closes."),
@@ -4083,7 +4083,7 @@ class SetupWizard(tk.Tk):
                         linux.deck_defaults(HERE, boot)
                         self.q.put(("log", "Steam Deck: the game is set to the Deck's screen (1280 x 800)."))
                         linux.install_desktop_entry(HERE)
-                        self.q.put(("log", "Added XI: Forever Offline to the menu: add it to Steam on the launcher's Settings page."))
+                        self.q.put(("log", "Added XIRPG to the menu: add it to Steam on the launcher's Settings page."))
                     except Exception as e:
                         self.q.put(("log", f"Could not set the Steam Deck defaults ({e})."))
                 self.q.put(("done", None))
@@ -4136,7 +4136,7 @@ def one_launcher_only():
         return True
     try:
         close_other = messagebox.askyesno(
-            "XI: Forever Offline",
+            "XIRPG",
             "The launcher is already open (it may be behind other windows, or still closing).\n\n"
             "Yes = close the other one and its servers, and open this one.\nNo = keep the other one.")
     except Exception:
@@ -4145,7 +4145,7 @@ def one_launcher_only():
         return False
     me, parent = os.getpid(), os.getppid()    # (the packaged exe runs as two processes: its starter and us)
     script = ("Get-CimInstance Win32_Process | Where-Object { $_.ProcessId -ne %d -and $_.ProcessId -ne %d -and "
-              "(($_.Name -like 'XI*Forever*Offline*.exe' -and $_.CommandLine -notlike '*--run*') -or "
+              "(($_.Name -like 'XIRPG*.exe' -and $_.CommandLine -notlike '*--run*') -or "
               "(($_.Name -eq 'pythonw.exe' -or $_.Name -eq 'python.exe') -and $_.CommandLine -like '*launcher_gui.pyw*')) } | "
               "ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }") % (me, parent)
     try:

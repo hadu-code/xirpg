@@ -56,7 +56,7 @@ The leader must be in the same party and the same zone.
 ]]
 
 addon.name    = 'followme';
-addon.author  = 'XI: Forever Offline';
+addon.author  = 'XIRPG';
 addon.version = '1.2';
 addon.desc    = 'Keeps this character following and fighting alongside a chosen player, with the game\'s own commands.';
 addon.link    = '';

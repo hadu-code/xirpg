@@ -26,7 +26,7 @@ https://github.com/Windower/Lua/blob/dev/addons/libs/packets/fields.lua
 require('common');
 local bit = require('bit');
 addon.name = 'Gambits';
-addon.author = 'XI: Forever Offline';
+addon.author = 'XIRPG';
 addon.version = '2.2.208';
 addon.desc = 'Player Gambits: ordered rules, 18 jobs, persistent editor.';
 addon.link = '';

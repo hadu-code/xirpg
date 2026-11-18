@@ -1,4 +1,4 @@
-"""Logic for the XI: Forever Offline launcher (no GUI code here, so it can be tested on its own)."""
+"""Logic for the XIRPG launcher (no GUI code here, so it can be tested on its own)."""
 import json, os, re, shutil, subprocess, sys
 
 # XIFO_TEST_PLATFORM=windows: the stand-in tests check the Windows paths on a Linux machine
@@ -9,7 +9,7 @@ SERVERS = ["xi_connect", "xi_world", "xi_search", "xi_profile", "xi_map"]
 MANAGED_SCRIPT = "xiforever.txt"          # the Ashita script the launcher owns on a new install
 OLD_MANAGED_SCRIPT = "phoenixsolo.txt"    # the same script on installs made before the rename (kept as it is)
 DEFAULT_BOOT = "xiforever.ini"            # boot file name for a new install; config.json's ashita_boot wins
-# Packaged as "XI Forever Offline.exe" (PyInstaller) the kit folder is where the exe is, not where Python unpacked itself.
+# Packaged as "XIRPG.exe" (PyInstaller) the kit folder is where the exe is, not where Python unpacked itself.
 FROZEN = bool(getattr(sys, "frozen", False))
 if FROZEN:   # programs we start from the exe (helpers, the restarted launcher) are new instances, not onefile children:
     os.environ["PYINSTALLER_RESET_ENVIRONMENT"] = "1"   # else "invalid originating onefile parent process" once we exit
@@ -43,7 +43,7 @@ def exe_name(name):
 
 def py_cmd(script, *args, unbuffered=False):
     """The command that runs one of the kit's Python scripts (a sidecar or a tool): python script.py ... from source,
-    or the launcher exe itself (XI Forever Offline.exe --run script.py ...) when packaged, so players need no Python."""
+    or the launcher exe itself (XIRPG.exe --run script.py ...) when packaged, so players need no Python."""
     if FROZEN:
         return [sys.executable, "--run", script] + list(args)
     return [sys.executable] + (["-u"] if unbuffered else []) + [script] + list(args)
@@ -108,7 +108,7 @@ def kill(image_name):
 
 def kill_tree(proc):
     """Stops a process we started and everything it started. The packaged launcher runs its helpers (squad chat,
-    auction house, crowd chat AI) as 'XI Forever Offline.exe --run ...', and a one-file exe is two processes: a
+    auction house, crowd chat AI) as 'XIRPG.exe --run ...', and a one-file exe is two processes: a
     starter and the real one. terminate() only ended the starter, so the real helpers kept running after the
     launcher closed (Yumainai, Careb)."""
     if proc is None:
@@ -142,7 +142,7 @@ def kill_stray_helpers():
         return
     if os.name != "nt":
         return
-    script = ("Get-CimInstance Win32_Process -Filter \"name LIKE 'XI%Forever%Offline%.exe'\" | "
+    script = ("Get-CimInstance Win32_Process -Filter \"name LIKE 'XIRPG%.exe'\" | "
               "Where-Object { $_.ProcessId -ne %d -and $_.CommandLine -like '*--run*' -and $_.CommandLine -notlike '*launcher_game*' } | "
               "ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }").replace("%d", str(os.getpid()))
     _run(["powershell", "-NoProfile", "-Command", script])
@@ -154,7 +154,7 @@ def kill_squad_chat():
         import launcher_linux
         launcher_linux.stop_pids(launcher_linux.pids_where(lambda argv: any(a.endswith("squad_chat.py") for a in argv)))
         return
-    script = ("Get-CimInstance Win32_Process -Filter \"name='pythonw.exe' OR name='python.exe' OR name LIKE 'XI_Forever_Offline.exe'\" | "
+    script = ("Get-CimInstance Win32_Process -Filter \"name='pythonw.exe' OR name='python.exe' OR name LIKE 'XIRPG.exe'\" | "
               "Where-Object { $_.CommandLine -like '*squad_chat.py*' } | "
               "ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }")
     _run(["powershell", "-NoProfile", "-Command", script])
@@ -288,7 +288,7 @@ def item_origin(kind, name, thirdparty_ids=(), added=()):
     """Where it comes from, for the Addons page: ours, a third-party download, one the player added, or Ashita's own."""
     low = name.lower()
     if kind == "addon" and low in OWN_ADDONS:
-        return "XI: Forever Offline"
+        return "XIRPG"
     if low in {t.lower() for t in added}:
         return "added by you"
     if low in {t.lower() for t in thirdparty_ids}:
@@ -426,7 +426,7 @@ class ScriptManager:
                 shutil.copy2(src, self.path)
             else:
                 with open(self.path, "w", encoding="utf-8", newline="\r\n") as f:
-                    f.write("# Managed by the XI: Forever Offline launcher\n")
+                    f.write("# Managed by the XIRPG launcher\n")
         if current != self.script_name:
             bak = self.boot_path + ".bak"
             if not os.path.exists(bak):
@@ -667,7 +667,7 @@ def write_kit_paths(server_dir, kit_dir=None, ashita_dir=None):
     if ashita_dir:
         parts.append("ashita = '%s'" % lua_path(ashita_dir))
     with open(os.path.join(module_dir, "kit_paths.lua"), "w", encoding="utf-8", newline="\n") as f:
-        f.write("-- Written by the XI: Forever Offline launcher. Do not edit: it is rewritten every launch.\n")
+        f.write("-- Written by the XIRPG launcher. Do not edit: it is rewritten every launch.\n")
         f.write("return { " + ", ".join(parts) + " }\n")
 
 
@@ -678,14 +678,14 @@ def write_crowds_config(server_dir, rates):
     module_dir = os.path.join(server_dir, "modules", "custom", "lua")
     os.makedirs(module_dir, exist_ok=True)
     with open(os.path.join(module_dir, "crowds_config.lua"), "w", encoding="utf-8", newline="\n") as f:
-        f.write("-- Written by the XI: Forever Offline launcher (Rates tab). Do not edit: it is rewritten every launch.\n")
+        f.write("-- Written by the XIRPG launcher (Rates tab). Do not edit: it is rewritten every launch.\n")
         f.write("return { enabled = %s, per_zone = %d, chat = %s, chat_amount = '%s', chat_ai = %s, field = %s, field_parties = %d }\n" % (
             "true" if rates.get("crowds", True) else "false", clean_crowd_size(rates.get("crowds_per_zone", 30)),
             "true" if rates.get("crowds_chat", True) else "false", amount,
             "true" if rates.get("crowds_chat_ai", True) else "false",
             "true" if rates.get("crowds_field", True) else "false", max(0, min(3, int(rates.get("crowds_field_parties", 1) or 0)))))
     with open(os.path.join(module_dir, "bots_config.lua"), "w", encoding="utf-8", newline="\n") as f:
-        f.write("-- Written by the XI: Forever Offline launcher (Rates tab). Do not edit: it is rewritten every launch.\n")
+        f.write("-- Written by the XIRPG launcher (Rates tab). Do not edit: it is rewritten every launch.\n")
         growth = rates.get("bots_growth", "realistic")
         growth = growth if growth in ("off", "realistic", "fast") else "realistic"
         head_start = bool(rates.get("bots_head_start")) and not rates.get("bots_head_start_done")
@@ -693,11 +693,11 @@ def write_crowds_config(server_dir, rates):
             "true" if rates.get("bots", True) else "false", max(0, min(600, int(rates.get("bots_roster", 100) or 0))),
             max(0, min(550, int(rates.get("bots_online", 50) or 0))), growth, "true" if head_start else "false"))
     with open(os.path.join(module_dir, "squad_config.lua"), "w", encoding="utf-8", newline="\n") as f:
-        f.write("-- Written by the XI: Forever Offline launcher (Rates tab). Do not edit: it is rewritten every launch.\n")
+        f.write("-- Written by the XIRPG launcher (Rates tab). Do not edit: it is rewritten every launch.\n")
         f.write("return { call_cooldown_min = %d, spell_scrolls = %s }\n" % (clean_call_cooldown(rates.get("squad_call_cooldown", 5)),
                                                                       "true" if rates.get("spell_scrolls", False) else "false"))
     with open(os.path.join(module_dir, "storage_config.lua"), "w", encoding="utf-8", newline="\n") as f:
-        f.write("-- Written by the XI: Forever Offline launcher (Rates tab). Do not edit: it is rewritten every launch.\n")
+        f.write("-- Written by the XIRPG launcher (Rates tab). Do not edit: it is rewritten every launch.\n")
         f.write("return { full_bags = %s }\n" % ("true" if rates.get("full_bags", True) else "false"))
 
 
@@ -829,7 +829,7 @@ LOGIN_EXPANSION_KEYS = {
 
 LOGIN_OPTIONAL_KEYS = {"TREASURES_OF_AHT_URGHAN", "TREASURES_OF_AHT_URHGAN"}   # two spellings: whichever the file has is used, no complaint about the other
 
-RATES_MARKER = "-- Generated by the XI: Forever Offline launcher (Rates tab) from settings/default/"
+RATES_MARKER = "-- Generated by the XIRPG launcher (Rates tab) from settings/default/"
 OLD_RATES_MARKER = ("-- Generated by the FFXI Solo launcher (Rates tab) from settings/default/",
                     "-- Generated by the Phoenix Solo launcher (Rates tab) from settings/default/")   # files written by earlier versions
 
@@ -998,7 +998,7 @@ def apply_rates(server_dir, rates):
         module_dir = os.path.join(server_dir, "modules", "custom", "lua")
         os.makedirs(module_dir, exist_ok=True)
         with open(os.path.join(module_dir, "era_exp_config.lua"), "w", encoding="utf-8", newline="\n") as f:
-            f.write("-- Written by the XI: Forever Offline launcher (Rates tab). Do not edit: it is rewritten every launch.\n")
+            f.write("-- Written by the XIRPG launcher (Rates tab). Do not edit: it is rewritten every launch.\n")
             f.write("return { enabled = " + ("true" if rates.get("era_exp", False) else "false") + " }\n")
     except OSError as problem:
         messages.append(f"era_exp_config.lua: could not be written ({problem})")
@@ -1007,7 +1007,7 @@ def apply_rates(server_dir, rates):
         module_dir = os.path.join(server_dir, "modules", "custom", "lua")
         os.makedirs(module_dir, exist_ok=True)
         with open(os.path.join(module_dir, "crowds_config.lua"), "w", encoding="utf-8", newline="\n") as f:
-            f.write("-- Written by the XI: Forever Offline launcher (Rates tab). Do not edit: it is rewritten every launch.\n")
+            f.write("-- Written by the XIRPG launcher (Rates tab). Do not edit: it is rewritten every launch.\n")
             f.write("return { enabled = %s, per_zone = %d }\n" % ("true" if rates.get("crowds", True) else "false",
                                                              clean_crowd_size(rates.get("crowds_per_zone", 15))))
     except OSError as problem:

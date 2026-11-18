@@ -1,6 +1,6 @@
 """Publishing an update for players from the dev PC (the launcher's Settings tab; no GUI code here).
 
-One press, after you confirm: build XI Forever Offline.exe, make the server and player zips, tag both repos and push the
+One press, after you confirm: build XIRPG.exe, make the server and player zips, tag both repos and push the
 tags (and the server's release branch), then create both GitHub releases and upload the files. GitHub is reached with
 the sign-in Git already keeps on this PC (Git Credential Manager), the same one your own git push uses.
 """
@@ -16,8 +16,8 @@ SERVER_REPO = "Hurami89/xi-forever-offline-server"
 API = "https://api.github.com/repos/"
 UPLOADS = "https://uploads.github.com/repos/"
 # The one-click download (Discord, website): GitHub always serves the newest full release's file under this name at
-# https://github.com/Hurami89/xi-forever-offline/releases/latest/download/XI-Forever-Offline.zip
-ONE_CLICK_NAME = "XI-Forever-Offline.zip"
+# https://github.com/Hurami89/xi-forever-offline/releases/latest/download/XIRPG.zip
+ONE_CLICK_NAME = "XIRPG.zip"
 ONE_CLICK_URL = f"https://github.com/{KIT_REPO}/releases/latest/download/{ONE_CLICK_NAME}"
 NO_WINDOW = 0x08000000 if os.name == "nt" else 0
 
@@ -47,7 +47,7 @@ def changes(folder, since):
         return []
     log = git(folder, "log", "--no-merges", "--pretty=format:%s", f"{since}..HEAD", check=False)
     return [line for line in log.splitlines() if line.strip() and not line.startswith("FFXI Solo: local server edits")
-            and not line.startswith("XI: Forever Offline: local server edits")]
+            and not line.startswith("XIRPG: local server edits")]
 
 
 def preflight(kit, server, server_running=False):
@@ -90,7 +90,7 @@ def github_token(run=subprocess.run):
 
 
 def api(method, url, token, data=None, body=None, content_type="application/json", length=None):
-    headers = {"Authorization": "Bearer " + token, "Accept": "application/vnd.github+json", "User-Agent": "XI-Forever-Offline-publish"}
+    headers = {"Authorization": "Bearer " + token, "Accept": "application/vnd.github+json", "User-Agent": "XIRPG-publish"}
     if data is not None:
         body = json.dumps(data).encode()
     if body is not None:
@@ -151,7 +151,7 @@ def publish(kit, server, version, notes, prerelease, log=print, run=subprocess.r
     steps = steps or ("build", "package", "tag", "release")
     python = sys.executable
     if "build" in steps:
-        log("1/4 Building XI Forever Offline.exe (a few minutes)...")
+        log("1/4 Building XIRPG.exe (a few minutes)...")
         stream(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", os.path.join(kit, "build_release.ps1")], kit, log)
     if "package" in steps:
         log("2/4 Making the server and player zips...")
@@ -160,16 +160,16 @@ def publish(kit, server, version, notes, prerelease, log=print, run=subprocess.r
     if "tag" in steps:
         log("3/4 Tagging and pushing...")
         for folder, remote, extra in ((server, "xiforever", ["HEAD:refs/heads/release"]), (kit, "origin", [])):
-            git(folder, "tag", "-a", version, "-m", f"XI: Forever Offline {version}")
+            git(folder, "tag", "-a", version, "-m", f"XIRPG {version}")
             for ref in extra + [version]:
                 git(folder, "push", remote, ref)
     if "release" in steps:
         log("4/4 Creating the GitHub releases...")
         token = token or github_token(run)
         dist = os.path.join(kit, "dist")
-        make_release(SERVER_REPO, version, f"XI: Forever Offline server {version}", notes, prerelease,
+        make_release(SERVER_REPO, version, f"XIRPG server {version}", notes, prerelease,
                      [os.path.join(dist, f"xi-forever-offline-server-{version}-win64.zip"), os.path.join(dist, "SHA256SUMS.txt")], token, log)
-        make_release(KIT_REPO, version, f"XI: Forever Offline {version}", notes, prerelease,
+        make_release(KIT_REPO, version, f"XIRPG {version}", notes, prerelease,
                      [os.path.join(dist, "kit", f"xi-forever-offline-{version}-win64.zip"), os.path.join(dist, "kit", "SHA256SUMS.txt"),
                       (os.path.join(dist, "kit", f"xi-forever-offline-{version}-win64.zip"), ONE_CLICK_NAME)], token, log)
     log(f"Done: {version} is published. Players' launchers will offer it" + (" to testers (test build)." if prerelease else "."))

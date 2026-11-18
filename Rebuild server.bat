@@ -1,5 +1,5 @@
 @echo off
-title Rebuild XI: Forever Offline server
+title Rebuild XIRPG server
 cd /d "%~dp0"
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0rebuild.ps1"
 echo.

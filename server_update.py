@@ -26,7 +26,7 @@ import time
 HERE = os.path.dirname(os.path.abspath(__file__))
 STATE_PATH = os.path.join(HERE, "update-state.json")
 BACKUPS = os.path.join(HERE, "backups")
-IDENT = ["-c", "user.name=XI: Forever Offline", "-c", "user.email=xiforever@localhost"]
+IDENT = ["-c", "user.name=XIRPG", "-c", "user.email=xiforever@localhost"]
 NO_WINDOW = 0x08000000 if os.name == "nt" else 0
 
 
@@ -282,7 +282,7 @@ def update(cfg, hooks=None, force_running=False):
     if g.run("diff", "--quiet", "HEAD")[0] != 0:
         say("Saving your server edits as a local commit...")
         g.run("add", "-u")
-        rc, _, err = g.run("commit", "-m", f"XI: Forever Offline: local server edits before update {tag}", ident=True)
+        rc, _, err = g.run("commit", "-m", f"XIRPG: local server edits before update {tag}", ident=True)
         if rc != 0:
             say("Could not save your edits (" + err[:200] + "). Nothing was changed.")
             g.run("reset", "--mixed", before)

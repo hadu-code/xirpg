@@ -23,11 +23,11 @@ class PublishTests(unittest.TestCase):
             return {"id": 7}
         tmp = tempfile.mkdtemp()
         files = []
-        for name in ("XI Forever Offline.zip", "SHA256SUMS.txt"):
+        for name in ("XIRPG.zip", "SHA256SUMS.txt"):
             path = os.path.join(tmp, name); open(path, "wb").write(b"x"); files.append(path)
         lp.make_release("me/repo", "v1.0.0", "t", "n", True, files, "tok", log=lambda m: None, opener=opener)
         self.assertEqual(calls[0], ("POST", "me/repo/releases", True))
-        self.assertIn("assets?name=XI.Forever.Offline.zip", calls[1][1])      # spaces become dots, like GitHub's own uploads
+        self.assertIn("assets?name=XIRPG.zip", calls[1][1])      # spaces become dots, like GitHub's own uploads
         self.assertEqual(calls[-1], ("PATCH", "me/repo/releases/7", False))
 
     def test_token_from_git(self):

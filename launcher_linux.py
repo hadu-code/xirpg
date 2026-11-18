@@ -1,4 +1,4 @@
-"""Linux and Steam Deck support for the XI: Forever Offline launcher (no GUI code here, so it can be tested on its own).
+"""Linux and Steam Deck support for the XIRPG launcher (no GUI code here, so it can be tested on its own).
 
 On Linux the game server, the database (MariaDB's own Linux build) and the launcher run natively. Only the game itself
 (PlayOnline, FINAL FANTASY XI, Ashita, xiloader and our addons) is a Windows program: it runs through Proton, started
@@ -30,7 +30,7 @@ UMU_RELATIVE = os.path.join(PROTON_DIR, "umu", "umu-run")
 PREFIX_STAMP = "xiforever-prefix.json"
 REGISTRY_FILE = "xiforever-game.reg"
 DESKTOP_ID = "xi-forever-offline"
-APP_NAME = "XI: Forever Offline"
+APP_NAME = "XIRPG"
 
 
 # ----- what machine is this -----
@@ -516,8 +516,8 @@ def ensure_wine_plugins(manager):
     return added
 
 
-SANDBOX_BEGIN = "; >>> XI: Forever Offline (Linux): Ashita's Sandbox finds the game"
-SANDBOX_END = "; <<< XI: Forever Offline (Linux)"
+SANDBOX_BEGIN = "; >>> XIRPG (Linux): Ashita's Sandbox finds the game"
+SANDBOX_END = "; <<< XIRPG (Linux)"
 
 
 def set_sandbox(boot_ini, cfg, on):
@@ -604,21 +604,21 @@ def desktop_entry_text(kit, exe):
     return ("[Desktop Entry]\nType=Application\nVersion=1.0\n"
             f"Name={APP_NAME}\nComment=Offline FINAL FANTASY XI with squad mates and a living world\n"
             f"Exec=\"{exe}\"\nPath={kit}\nIcon={icon}\nTerminal=false\nCategories=Game;RolePlaying;\n"
-            "StartupWMClass=XI Forever Offline\n")
+            "StartupWMClass=XIRPG\n")
 
 
 def launcher_exe(kit):
     """The program a menu entry or Steam starts: the packaged launcher, else the launcher started with Python."""
     if getattr(sys, "frozen", False):
         return sys.executable
-    for name in ("XI-Forever-Offline", "XI Forever Offline"):
+    for name in ("XIRPG", "XIRPG"):
         if os.path.isfile(os.path.join(kit, name)):
             return os.path.join(kit, name)
     return os.path.join(kit, "xi-forever-offline.sh")
 
 
 def install_desktop_entry(kit, home=None):
-    """Adds XI: Forever Offline to the application menu (and so to Steam's 'Add a Non-Steam Game' list).
+    """Adds XIRPG to the application menu (and so to Steam's 'Add a Non-Steam Game' list).
     Returns the .desktop file's path."""
     home = home or os.path.expanduser("~")
     data = os.environ.get("XDG_DATA_HOME") or os.path.join(home, ".local", "share")
@@ -640,7 +640,7 @@ def steam_running():
 
 
 def open_steam_add_game(popen=subprocess.Popen):
-    """Opens Steam's 'Add a Non-Steam Game' window, where XI: Forever Offline is now listed. False when Steam isn't
+    """Opens Steam's 'Add a Non-Steam Game' window, where XIRPG is now listed. False when Steam isn't
     there."""
     steam = shutil.which("steam")
     if not steam:

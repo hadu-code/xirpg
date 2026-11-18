@@ -1,6 +1,11 @@
 # Credits
 
-XI: Forever Offline is an unofficial, non-commercial fan project. It is not affiliated with or endorsed by Square Enix.
+XIRPG is an unofficial, non-commercial fan project. It is not affiliated with or endorsed by Square Enix.
+
+## Based on XI: Forever Offline
+This project is a fork of [XI: Forever Offline](https://github.com/Hurami89/xi-forever-offline) and its
+[server](https://github.com/Hurami89/xi-forever-offline-server) by Hurami89, both released under the GNU GPL v3. The
+sections below are the original project's credits; "our own work" there means the XI: Forever Offline authors' work.
 
 ## Square Enix
 FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.

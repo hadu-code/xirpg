@@ -4,7 +4,7 @@ This folder lets your squad mates answer in party chat, with their own backstori
 
 ## Normal use
 
-The XI: Forever Offline launcher starts this sidecar hidden with the servers when AI chat is on (Living world + AI chat) and stops it when the game closes. You do not need to open a window.
+The XIRPG launcher starts this sidecar hidden with the servers when AI chat is on (Living world + AI chat) and stops it when the game closes. You do not need to open a window.
 
 In game:
 

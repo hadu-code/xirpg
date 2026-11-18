@@ -122,7 +122,7 @@ class Machine(unittest.TestCase):
         self.assertTrue(ll.is_steam_deck(os_release="", board="", env={"SteamDeck": "1"}))
 
     def test_windows_path(self):
-        self.assertEqual(ll.windows_path("/home/deck/XI Forever Offline/Game"), "Z:\\home\\deck\\XI Forever Offline\\Game")
+        self.assertEqual(ll.windows_path("/home/deck/XIRPG/Game"), "Z:\\home\\deck\\XIRPG\\Game")
 
 
 class Registry(unittest.TestCase):
@@ -264,14 +264,14 @@ class Desktop(unittest.TestCase):
             os.makedirs(os.path.join(home, "Desktop"))
             old = os.environ.pop("XDG_DATA_HOME", None)
             try:
-                path = ll.install_desktop_entry("/games/XI Forever Offline", home=home)
+                path = ll.install_desktop_entry("/games/XIRPG", home=home)
             finally:
                 if old is not None:
                     os.environ["XDG_DATA_HOME"] = old
             with open(path) as handle:
                 text = handle.read()
-            self.assertIn("Name=XI: Forever Offline", text)
-            self.assertIn("Path=/games/XI Forever Offline", text)
+            self.assertIn("Name=XIRPG", text)
+            self.assertIn("Path=/games/XIRPG", text)
             self.assertTrue(os.path.exists(os.path.join(home, "Desktop", "xi-forever-offline.desktop")))
 
 
@@ -526,9 +526,9 @@ class Downloads(unittest.TestCase):
             self.assertTrue(ls.valid_server(server))
 
     def test_update_unpack(self):
-        data = tar_bytes([("XI Forever Offline/XI-Forever-Offline", b"new", 0o755, None),
-                          ("XI Forever Offline/launcher_core.py", b"code", 0o644, None),
-                          ("XI Forever Offline/keep.txt", b"theirs", 0o644, None)])
+        data = tar_bytes([("XIRPG/XIRPG", b"new", 0o755, None),
+                          ("XIRPG/launcher_core.py", b"code", 0o644, None),
+                          ("XIRPG/keep.txt", b"theirs", 0o644, None)])
         with tempfile.TemporaryDirectory() as tmp:
             path = os.path.join(tmp, "k.tar.gz")
             with open(path, "wb") as handle:
@@ -538,7 +538,7 @@ class Downloads(unittest.TestCase):
             with open(os.path.join(kit, "keep.txt"), "w") as handle:
                 handle.write("mine")
             self.assertEqual(lu._unpack(path, kit, keep=("keep.txt",), log=lambda m: None), 2)
-            self.assertTrue(os.access(os.path.join(kit, "XI-Forever-Offline"), os.X_OK))
+            self.assertTrue(os.access(os.path.join(kit, "XIRPG"), os.X_OK))
             self.assertFalse(os.access(os.path.join(kit, "launcher_core.py"), os.X_OK))
             with open(os.path.join(kit, "keep.txt")) as handle:
                 self.assertEqual(handle.read(), "mine")

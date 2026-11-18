@@ -1,6 +1,6 @@
 --[[
 servermenu 1.6
-One menu for XI: Forever Offline, opened from a small Squads button on the screen. It replaces the Squad panel (/sq still works).
+One menu for XIRPG, opened from a small Squads button on the screen. It replaces the Squad panel (/sq still works).
 
   Squad        your squad mates: call, dismiss, role, mode, main and support job, and a Profile button per mate with
                their current stats, HP/MP/TP, haste, jobs and equipped items (the Titan-style profile screen);
@@ -34,9 +34,9 @@ Settings (button place, last tab): config/addons/servermenu/settings.cfg
 ]]
 
 addon.name    = 'servermenu';
-addon.author  = 'XI: Forever Offline';
+addon.author  = 'XIRPG';
 addon.version = '1.17';
-addon.desc    = 'The XI: Forever Offline menu: squad mates, and the dualbox character with his gambits.';
+addon.desc    = 'The XIRPG menu: squad mates, and the dualbox character with his gambits.';
 addon.link    = '';
 
 require('common');
@@ -1631,11 +1631,11 @@ local function menuWindow()
                                 { 'ImGuiCol_HeaderHovered', { 0.26, 0.29, 0.38, 1 } }, { 'ImGuiCol_Separator', { 0.32, 0.34, 0.42, 0.55 } },
                                 { 'ImGuiCol_Text', C.text } });
     local flags = (G('ImGuiWindowFlags_NoTitleBar') or 0) + (G('ImGuiWindowFlags_NoCollapse') or 0);
-    if imgui.Begin('XI: Forever Offline##servermenu', S.open, flags) then
+    if imgui.Begin('XIRPG##servermenu', S.open, flags) then
         scaleWindow();
         colorText(C.gold, 'SQUADS');
         imgui.SameLine(0, 8);
-        dimText('XI: Forever Offline');
+        dimText('XIRPG');
         if has('GetWindowWidth') then
             local w = imgui.GetWindowWidth();
             if type(w) == 'number' then imgui.SameLine(w - px(44), 0); else imgui.SameLine(0, 20); end

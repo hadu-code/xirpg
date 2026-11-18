@@ -1,5 +1,5 @@
 addon.name    = 'crystalboy'
-addon.author  = 'XI: Forever Offline'
+addon.author  = 'XIRPG'
 addon.version = '1.3'
 addon.desc    = 'Crystal Boy: play your Game Boy cartridges inside FFXI.'
 addon.link    = ''

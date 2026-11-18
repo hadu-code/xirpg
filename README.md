@@ -1,8 +1,8 @@
-# XI: Forever Offline
+# XIRPG
 
-![XI: Forever Offline](assets/promo/hero-1920x1080.jpg)
+![XIRPG](assets/promo/hero-1920x1080.jpg)
 
-**[Download the latest version](https://github.com/Hurami89/xi-forever-offline/releases/latest/download/XI-Forever-Offline.zip)**  ·  **[Discord](https://discord.gg/2bh3QYPptz)**  ·  [All releases](https://github.com/Hurami89/xi-forever-offline/releases)
+> A fork of [XI: Forever Offline](https://github.com/Hurami89/xi-forever-offline) by Hurami89 (GNU GPL v3). No releases of this fork are published yet: build it yourself with `build_release.ps1` (see `RELEASING.md`).
 
 An offline, single-player take on classic-era FINAL FANTASY XI. Each player runs the whole world on their own PC:
 a 75-era server based on [Phoenix](https://github.com/phoenixffxi/Phoenix) (a fork of LandSandBoat), a launcher,
@@ -24,9 +24,9 @@ and Ashita addons.
 - Windows 10 or 11.
 
 ## Install
-1. Download `XI-Forever-Offline.zip` (link above).
+1. Build or get `XIRPG.zip`.
 2. Unzip it anywhere, for example `C:\XIForeverOffline`.
-3. Run `XI Forever Offline.exe` and follow the setup. It finds your game, then downloads Ashita, the server, a small
+3. Run `XIRPG.exe` and follow the setup. It finds your game, then downloads Ashita, the server, a small
    database and the add-ons you pick, all from their official sources.
 
 ## Repositories
@@ -37,5 +37,5 @@ and Ashita addons.
 Our code is released under the GNU GPL v3 (see `LICENSE`). Square Enix material and third-party tools are not covered
 by that license: see `CREDITS.md`.
 
-XI: Forever Offline is an unofficial fan project. It is not affiliated with or endorsed by Square Enix.
+XIRPG is an unofficial fan project. It is not affiliated with or endorsed by Square Enix.
 FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd. FINAL FANTASY XI © SQUARE ENIX CO., LTD.

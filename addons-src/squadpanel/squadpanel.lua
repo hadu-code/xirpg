@@ -14,7 +14,7 @@ A role or mode applies when a mate is called, so "Apply now" dismisses the squad
 ]]
 
 addon.name    = 'squadpanel';
-addon.author  = 'XI: Forever Offline';
+addon.author  = 'XIRPG';
 addon.version = '0.13';
 addon.desc    = 'Click to set the role, mode and switches of your squad mates, or read their stats and gear.';
 addon.link    = '';

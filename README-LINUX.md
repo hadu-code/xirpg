@@ -1,4 +1,4 @@
-# XI: Forever Offline on Linux and the Steam Deck (experimental)
+# XIRPG on Linux and the Steam Deck (experimental)
 
 The server, the database and the launcher run natively on Linux. The game itself (PlayOnline, FINAL FANTASY XI, Ashita
 and our addons) is a Windows program and runs through Proton, which the launcher downloads and keeps inside its own
@@ -12,9 +12,9 @@ folder. Nothing is installed system-wide and nothing needs `sudo`, so it works o
   `PlayOnlineViewer` and `FINAL FANTASY XI` in it) to a USB stick or straight to the Linux machine.
 
 ## Install
-1. Download `XI-Forever-Offline-Linux.tar.gz` and extract it where you want it (your home folder, or the SD card on a
+1. Download `XIRPG-Linux.tar.gz` and extract it where you want it (your home folder, or the SD card on a
    Deck). Steam Deck: do this in Desktop Mode.
-2. Open the `XI Forever Offline` folder and run `XI-Forever-Offline`.
+2. Open the `XIRPG` folder and run `XIRPG`.
 3. The setup asks for the game folder (the `SquareEnix` folder you copied), your world and an account, then downloads
    Ashita, the server, Proton and MariaDB. The first PLAY also downloads Proton's runtime (a few minutes).
 
@@ -22,7 +22,7 @@ On a Steam Deck the setup picks a small world, turns AI chat off (it needs a lot
 Deck's screen (1280 x 800).
 
 ## Steam Deck: play from Game Mode
-Launcher: **SETTINGS > Add to Steam and the menu**, then in Steam's window tick XI: Forever Offline and press
+Launcher: **SETTINGS > Add to Steam and the menu**, then in Steam's window tick XIRPG and press
 *Add Selected Programs*. In Game Mode start it from your library; press PLAY with the touchscreen or the trackpad.
 For the game itself, a controller layout with the trackpads as mouse works well (FFXI's own gamepad settings apply too).
 

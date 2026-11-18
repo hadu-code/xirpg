@@ -1,4 +1,4 @@
-"""Co-op for XI: Forever Offline (no GUI here): invite codes, the host's small service, the visitor's side of a visit, and
+"""Co-op for XIRPG (no GUI here): invite codes, the host's small service, the visitor's side of a visit, and
 the settings a PC needs to let friends in. Character data itself is handled by launcher_passport.py.
 
 How two launchers talk
@@ -40,7 +40,7 @@ CHECKPOINT_MIN_SECONDS = 60          # ...and the host makes one at most this of
 TAKE_BACK_HOURS = 24                 # the host must be out of reach this long before "take back" is offered
 MAX_BODY = 48 * 1024 * 1024
 GAME_PORTS = (("log in", 54231), ("lobby", 54230), ("lobby view", 54001), ("search", 54002), ("profile", 51220))
-FIREWALL_RULE = "XI Forever Offline co-op"
+FIREWALL_RULE = "XIRPG co-op"
 SERVER_PROGRAMS = ("xi_connect", "xi_map", "xi_search", "xi_profile")
 VISIT_BOOT = "xiforever-coop.ini"
 NO_WINDOW = 0x08000000 if os.name == "nt" else 0
@@ -1007,7 +1007,7 @@ def download_tailscale(kit, log=print, opener=None):
         except OSError:
             pass
 
-    request = urllib.request.Request(TAILSCALE_INSTALLER, headers={"User-Agent": "XI-Forever-Offline-launcher"})
+    request = urllib.request.Request(TAILSCALE_INSTALLER, headers={"User-Agent": "XIRPG-launcher"})
     size, first = 0, b""
     try:
         with (opener or urllib.request.urlopen)(request, timeout=30) as response:
@@ -1175,7 +1175,7 @@ def write_host_config(server_dir, hosting, connect):
     target = os.path.join(server_dir, "modules", "custom", "lua", "coop_config.lua")
     try:
         with open(target, "w", encoding="utf-8", newline="\n") as handle:
-            handle.write("-- Written by the XI: Forever Offline launcher (CO-OP page) at every PLAY.\n"
+            handle.write("-- Written by the XIRPG launcher (CO-OP page) at every PLAY.\n"
                          f"return {{ hosting = {'true' if hosting else 'false'}, world = '{safe}' }}\n")
     except OSError:
         pass

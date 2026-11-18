@@ -1,9 +1,9 @@
-# Puts an "XI Forever Offline" shortcut on your desktop that opens the launcher window (no console).
-# It points at "XI Forever Offline.exe" when that is here (players), else at launcher_gui.pyw with Python (the dev copy).
-# (a GitHub download is named XI.Forever.Offline.exe: either name works)
-$exe = Get-ChildItem $PSScriptRoot -Filter "XI?Forever?Offline.exe" -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
+# Puts an "XIRPG" shortcut on your desktop that opens the launcher window (no console).
+# It points at "XIRPG.exe" when that is here (players), else at launcher_gui.pyw with Python (the dev copy).
+# (a GitHub download is named XIRPG.exe: either name works)
+$exe = Get-ChildItem $PSScriptRoot -Filter "XIRPG.exe" -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
 if ($exe) {
-  $lnk = Join-Path ([Environment]::GetFolderPath('Desktop')) "XI Forever Offline.lnk"
+  $lnk = Join-Path ([Environment]::GetFolderPath('Desktop')) "XIRPG.lnk"
   $s = (New-Object -ComObject WScript.Shell).CreateShortcut($lnk)
   $s.TargetPath = $exe
   $s.WorkingDirectory = $PSScriptRoot
@@ -21,7 +21,7 @@ if ($LASTEXITCODE -ne 0) {
   Write-Host "Your Python does not include tkinter (the window toolkit). Re-run the Python installer, choose Modify, and tick 'tcl/tk and IDLE'." -ForegroundColor Yellow
 }
 
-$lnk = Join-Path ([Environment]::GetFolderPath('Desktop')) "XI Forever Offline.lnk"
+$lnk = Join-Path ([Environment]::GetFolderPath('Desktop')) "XIRPG.lnk"
 $s = (New-Object -ComObject WScript.Shell).CreateShortcut($lnk)
 $s.TargetPath = $pyw
 $s.Arguments = "`"$PSScriptRoot\launcher_gui.pyw`""

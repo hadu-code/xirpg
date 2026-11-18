@@ -4,6 +4,7 @@ KIT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, KIT)
 import launcher_update as up
 import launcher_thirdparty as tp
+up.KIT_REPO = up.KIT_REPO or "example/xirpg"      # the fork ships with kit updates off; the tests still cover them
 
 
 def zip_bytes(files):
@@ -49,7 +50,7 @@ class UpdateTests(unittest.TestCase):
         self.assertGreater(up.version_key("v0.1.10"), up.version_key("v0.1.9"))
 
     def test_check_respects_test_builds(self):
-        open(os.path.join(self.kit, "VERSION.txt"), "w").write("XI: Forever Offline v0.1.0\n")
+        open(os.path.join(self.kit, "VERSION.txt"), "w").write("XIRPG v0.1.0\n")
         fetch = self.releases({up.KIT_REPO: [("v0.1.0", True, {}), ("v0.2.0", True, {}), ("v0.1.1", False, {})],
                                up.SERVER_REPO: [("v0.1.0", True, {})]})
         r = up.check(self.kit, None, False, fetch)
@@ -60,7 +61,7 @@ class UpdateTests(unittest.TestCase):
     def test_kit_update_keeps_personal_files_and_checks_sum(self):
         for name, data in (("config.json", "mine"), ("launcher_core.py", "old"), ("rates.json", "my rates")):
             open(os.path.join(self.kit, name), "w").write(data)
-        data = zip_bytes({"XI Forever Offline/launcher_core.py": "new", "XI Forever Offline/VERSION.txt": "XI: Forever Offline v0.1.1\n"})
+        data = zip_bytes({"XIRPG/launcher_core.py": "new", "XIRPG/VERSION.txt": "XIRPG v0.1.1\n"})
         name = "xi-forever-offline-v0.1.1-win64.zip"
         good = self.releases({up.KIT_REPO: [("v0.1.1", False, {name: data, "SHA256SUMS.txt": (hashlib.sha256(data).hexdigest() + "  " + name).encode()})]})
         rel = up.newest_release(up.KIT_REPO, False, good)
@@ -73,11 +74,11 @@ class UpdateTests(unittest.TestCase):
             up.update_kit(self.kit, up.newest_release(up.KIT_REPO, False, bad), bad, log=lambda m: None)
 
     def test_running_exe_is_moved_aside(self):
-        exe = os.path.join(self.kit, "XI Forever Offline.exe"); open(exe, "w").write("old exe")
-        zpath = os.path.join(self.tmp, "k.zip"); open(zpath, "wb").write(zip_bytes({"top/XI Forever Offline.exe": "new exe"}))
+        exe = os.path.join(self.kit, "XIRPG.exe"); open(exe, "w").write("old exe")
+        zpath = os.path.join(self.tmp, "k.zip"); open(zpath, "wb").write(zip_bytes({"top/XIRPG.exe": "new exe"}))
         up._unpack(zpath, self.kit, log=lambda m: None, running_exe=exe)
         self.assertEqual(open(exe).read(), "new exe")
-        self.assertEqual(open(os.path.join(self.kit, "XI Forever Offline.old.exe")).read(), "old exe")
+        self.assertEqual(open(os.path.join(self.kit, "XIRPG.old.exe")).read(), "old exe")
 
     def test_database_update_keeps_player_tables_and_runs_migrations(self):
         os.makedirs(os.path.join(self.server, "sql")); os.makedirs(os.path.join(self.server, "tools", "migrations"))

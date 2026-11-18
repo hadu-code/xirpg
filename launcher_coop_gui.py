@@ -28,7 +28,7 @@ TAILSCALE_URL = "https://tailscale.com/download"
 INTRO = ("Co-op lets a friend bring their own character into your world, or you into theirs. Whatever is earned on a "
          "visit goes home with the visitor. It works on the same network (LAN or Wi-Fi, no internet needed) and over "
          "the internet with Tailscale.\n\n"
-         "This is an early test version: both of you need the same version of XI: Forever Offline. A character's "
+         "This is an early test version: both of you need the same version of XIRPG. A character's "
          "squad mates travel with it, and a copy of each travelling character is saved before every trip.")
 TAILSCALE_STEPS = ("Tailscale is a free program that puts your PC and your friend's on one private network, so nothing "
                    "on your PC is opened to the rest of the internet.\n\n"

@@ -33,7 +33,7 @@ GREETING_EVENTS = ("spawn", "levelup", "death", "weaponskill")
 GREETING_LABELS = {"spawn": "When called", "levelup": "Level up", "death": "Knocked out", "weaponskill": "Weaponskill"}
 GREETING_HELP = ("One line per greeting; one is picked at random. {master}, {zone} and {job} are filled in when the "
                  "mate speaks. Leave a box empty to use the mate's built-in voice lines for that moment.")
-GREETINGS_MARKER = "-- Written by the XI: Forever Offline launcher (Squad tab > Greetings). It is rewritten when you save there."
+GREETINGS_MARKER = "-- Written by the XIRPG launcher (Squad tab > Greetings). It is rewritten when you save there."
 
 
 def load_json(path):

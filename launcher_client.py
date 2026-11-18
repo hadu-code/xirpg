@@ -1,4 +1,4 @@
-"""Game-file changes XI: Forever Offline makes to the player's FINAL FANTASY XI folder, after the era game files.
+"""Game-file changes XIRPG makes to the player's FINAL FANTASY XI folder, after the era game files.
 
   1. Home Point teleport window: the era files only offer "Set home point"; 11 bytes per Home Point are put back
      (client-patches\\homepoints.json; only when the era files are installed, i.e. <kit>\\dat-backup exists).

@@ -17,7 +17,7 @@ import time
 import urllib.request
 import zipfile
 
-USER_AGENT = "XI-Forever-Offline-launcher"
+USER_AGENT = "XIRPG-launcher"
 API = "https://api.github.com/repos/"
 # XIFO_TEST_PLATFORM=windows: the stand-in tests check the Windows paths on a Linux machine
 PLATFORM = "windows" if (os.name == "nt" or os.environ.get("XIFO_TEST_PLATFORM") == "windows") else "linux"

@@ -1,12 +1,12 @@
-# XI: Forever Offline: the Linux / Steam Deck launcher for each release.
+# XIRPG: the Linux / Steam Deck launcher for each release.
 #
 # When the Publish button (launcher_publish.py, on the dev PC) pushes a version tag (v0.1.40), this builds the Linux
 # launcher (build_release.sh), packs the player download (package_kit.py --platform linux) and adds it to that tag's
 # GitHub release, next to the Windows files:
 #   xi-forever-offline-<tag>-linux-x64.tar.gz   (what the Linux launcher's update check downloads)
 #   SHA256SUMS-linux.txt
-#   XI-Forever-Offline-Linux.tar.gz             (full releases only: the fixed one-click link
-#                                                .../releases/latest/download/XI-Forever-Offline-Linux.tar.gz)
+#   XIRPG-Linux.tar.gz             (full releases only: the fixed one-click link
+#                                                .../releases/latest/download/XIRPG-Linux.tar.gz)
 # It waits for the release to be published (the Publish button makes it a little after pushing the tag).
 # Built on Ubuntu 22.04 so the launcher runs on SteamOS and on desktop distros from 2022 on (glibc 2.35+).
 # It also checks MariaDB's own Linux package on Arch Linux (what SteamOS is made from) with the launcher's own code.
@@ -83,7 +83,7 @@ jobs:
         run: |
           Xvfb :99 -screen 0 1280x800x24 &
           sleep 2
-          DISPLAY=:99 timeout 20 ./XI-Forever-Offline > window.log 2>&1 || true
+          DISPLAY=:99 timeout 20 ./XIRPG > window.log 2>&1 || true
           cat window.log
           if grep -qi "Traceback\|Error" window.log; then exit 1; fi
           if [ -f logs/launcher-error.log ]; then cat logs/launcher-error.log; exit 1; fi
@@ -111,8 +111,8 @@ jobs:
           gh release upload "$TAG" --repo "$GITHUB_REPOSITORY" --clobber \
             "dist/kit/xi-forever-offline-$TAG-linux-x64.tar.gz" dist/kit/SHA256SUMS-linux.txt
           if [ "$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json isPrerelease -q .isPrerelease)" = "false" ]; then
-            cp "dist/kit/xi-forever-offline-$TAG-linux-x64.tar.gz" dist/kit/XI-Forever-Offline-Linux.tar.gz
-            gh release upload "$TAG" --repo "$GITHUB_REPOSITORY" --clobber dist/kit/XI-Forever-Offline-Linux.tar.gz
+            cp "dist/kit/xi-forever-offline-$TAG-linux-x64.tar.gz" dist/kit/XIRPG-Linux.tar.gz
+            gh release upload "$TAG" --repo "$GITHUB_REPOSITORY" --clobber dist/kit/XIRPG-Linux.tar.gz
           fi
 
   mariadb-on-arch:

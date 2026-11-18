@@ -255,7 +255,7 @@ def unpack(data):
     except Exception:
         raise PassportError("That file is not a character passport (or it is damaged).")
     if not isinstance(passport, dict) or passport.get("format") not in (FORMAT, OLD_FORMAT) or not isinstance(passport.get("tables"), dict):
-        raise PassportError("That passport was made by another version of XI: Forever Offline.")
+        raise PassportError("That passport was made by another version of XIRPG.")
     name = passport.get("name")
     if not isinstance(name, str) or not re.fullmatch(r"[A-Za-z]{3,15}", name):
         raise PassportError("That passport has no valid character name.")
@@ -404,7 +404,7 @@ def _check_tables(passport, layout, squad=None):
         _check_squad(passport, squad)
     if passport.get("schema") != layout_signature(layout, squad, fmt) or set(theirs) != set(layout):
         raise PassportError("The two worlds are on different versions (their characters are stored differently). "
-                            "Update both to the same version of XI: Forever Offline first.")
+                            "Update both to the same version of XIRPG first.")
     for table, cols in layout.items():
         block = theirs[table]
         if not isinstance(block, dict) or block.get("cols") != cols or not isinstance(block.get("rows"), list):
@@ -825,7 +825,7 @@ def come_home(conn, data, backup_dir=None):
         # squad at home is left exactly as it is, whatever the passport holds.
         took_squad = bool(away[4]) and passport.get("format") == FORMAT
         if bool(away[4]) and not took_squad:
-            raise PassportError("That passport was made by another version of XI: Forever Offline.")
+            raise PassportError("That passport was made by another version of XIRPG.")
         before_tables = _read(cur, layout, charid, full=True)
         before_squad = _read_squad(cur, squad, charid)
         before = summary(before_tables)
@@ -936,7 +936,7 @@ def import_guest(conn, data, guest_id, gkey, login, password, max_guests=6, stam
     if passport.get("kind") != "visit" or not home_world or not home_charid or not passport.get("nonce"):
         raise PassportError("That is not a passport for a visit.")
     if passport.get("format") != FORMAT:      # (a new visit: both worlds on the version in which squads travel)
-        raise PassportError("That passport was made by another version of XI: Forever Offline. Update both worlds first.")
+        raise PassportError("That passport was made by another version of XIRPG. Update both worlds first.")
     if home_world == world["id"]:
         raise PassportError("That character lives in this world already.")
     name = passport["name"]

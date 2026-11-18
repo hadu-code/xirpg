@@ -60,7 +60,7 @@ class UserAddonTests(unittest.TestCase):
             core.install_user_item(self.ashita, self.zip_of({"notes.txt": "x"}), self.backups)
 
     def test_origin_labels(self):
-        self.assertEqual(core.item_origin("addon", "Gambits"), "XI: Forever Offline")
+        self.assertEqual(core.item_origin("addon", "Gambits"), "XIRPG")
         self.assertEqual(core.item_origin("addon", "xiui", ["xiui"]), "download")
         self.assertEqual(core.item_origin("addon", "cool", ["xiui"], ["cool"]), "added by you")
         self.assertEqual(core.item_origin("addon", "fps"), "Ashita")

@@ -7,7 +7,7 @@ local M = {}
 M.CRYSTAL_BOY = 8100
 
 -- Each cartridge plays the first of its titles that is in the roms folder. The free games that come with
--- XI: Forever Offline (crystalboy-games, copied into roms) are last, so a ROM of your own still comes first.
+-- XIRPG (crystalboy-games, copied into roms) are last, so a ROM of your own still comes first.
 M.list = {
     [8101] = { name = 'Mana Recollection', titles = { 'SEIKEN DENSETSU', 'FINAL FANTASY ADV', 'FF ADVENTURE', 'MYSTIC QUEST', 'AEVILIA' } },
     [8102] = { name = 'Tower Recollection', titles = { 'SAGA', 'AIRAKI1' } },

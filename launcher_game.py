@@ -1,4 +1,4 @@
-"""The game files for XI: Forever Offline.
+"""The game files for XIRPG.
 
 Three ways to get them (first-run setup asks):
   copy      the player has FINAL FANTASY XI: copy PlayOnline and FFXI into the kit's own Game folder, so their own
@@ -300,7 +300,7 @@ def start_switch(kit, cfg, run_elevated, reg=None, is_running=None, sleep=time.s
         os.remove(state_path)
     except OSError:
         pass
-    raise RuntimeError("PlayOnline could not be pointed at XI: Forever Offline's copy of the game: Windows' permission "
+    raise RuntimeError("PlayOnline could not be pointed at XIRPG's copy of the game: Windows' permission "
                        "prompt was refused or never answered. Press PLAY again and choose Yes, or the game would start "
                        "your other FINAL FANTASY XI install.")
 
@@ -426,8 +426,8 @@ def retail_install(kit, cfg, reg=None):
 
 
 TARGET_OFFSET_NOV = (2026, 10, 26)  # FFXiMain linked from here on = the November 2026 game update (client 30261102_0; its link date can be a few days earlier; the October client is 2026-10-05). Ashita main a807426
-_OFFSET_BEGIN = "; >>> XI: Forever Offline: target offset for this game version (written at PLAY)"
-_OFFSET_END = "; <<< XI: Forever Offline"
+_OFFSET_BEGIN = "; >>> XIRPG: target offset for this game version (written at PLAY)"
+_OFFSET_END = "; <<< XIRPG"
 
 
 def match_target_offset(ashita_dir, ffxi_dir):
@@ -532,7 +532,7 @@ def download_to(url, path, log=print, context=None, chunk=1 << 20):
         return path
     part = path + ".part"
     have = os.path.getsize(part) if os.path.exists(part) else 0
-    request = urllib.request.Request(url, headers={"User-Agent": "XI-Forever-Offline"})
+    request = urllib.request.Request(url, headers={"User-Agent": "XIRPG"})
     if have:
         request.add_header("Range", f"bytes={have}-")
     with urllib.request.urlopen(request, timeout=60, context=context) as response:
@@ -665,7 +665,7 @@ def finish_version_check(ffxi_dir):
 
 
 def main(argv):
-    """XI Forever Offline.exe --run launcher_game.py hold|recover <state file>   (run elevated by the launcher)"""
+    """XIRPG.exe --run launcher_game.py hold|recover <state file>   (run elevated by the launcher)"""
     if len(argv) != 2 or argv[0] not in ("hold", "recover"):
         print(main.__doc__)
         return 2

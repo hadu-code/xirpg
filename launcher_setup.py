@@ -516,7 +516,7 @@ def write_boot(ashita_dir, login, password):
         return f"{BOOT_NAME} already exists - left as it is."
     with open(os.path.join(boot_dir, "example-privateserver.ini"), encoding="utf-8-sig") as handle:
         text = handle.read()
-    lines = {"name": "XI: Forever Offline", "file": ".\\\\bootloader\\\\xiloader.exe",
+    lines = {"name": "XIRPG", "file": ".\\\\bootloader\\\\xiloader.exe",
              "command": f"--server 127.0.0.1 --user {login} --pass {password}", "script": SCRIPT_NAME}
     for key, value in lines.items():
         text, count = re.subn(r"(?m)^(" + key + r"\s*=\s*).*$", lambda m: m.group(1) + value, text, count=1)
@@ -538,7 +538,7 @@ def write_script(ashita_dir, interface, addons=(), plugins=()):
             lines = handle.read().splitlines()
     except OSError:
         lines = ["/load thirdparty", "/load addons", "/load screenshot"]
-    lines = ["# Managed by the XI: Forever Offline launcher (Addons tab)."] + lines
+    lines = ["# Managed by the XIRPG launcher (Addons tab)."] + lines
     loads = [f"/load {p}" for p in plugins] + [f"/addon load {a}" for a in addons]
     if interface == "xiui":
         loads.append("/addon load xiui")

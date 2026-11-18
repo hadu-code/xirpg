@@ -1,5 +1,5 @@
 {
-  "_about": "Other people's work that XI: Forever Offline downloads from its official release at install time and never rehosts. Read by launcher_thirdparty.py. 'tag' pins the tested version; 'into' is the folder the files go to (ashita or kit); 'files' maps folders in the download to folders there; 'keep' lists folders whose existing files are never replaced (your settings).",
+  "_about": "Other people's work that XIRPG downloads from its official release at install time and never rehosts. Read by launcher_thirdparty.py. 'tag' pins the tested version; 'into' is the folder the files go to (ashita or kit); 'files' maps folders in the download to folders there; 'keep' lists folders whose existing files are never replaced (your settings).",
   "items": [
     {
       "id": "ashita",
@@ -32,8 +32,8 @@
     },
     {
       "id": "server",
-      "name": "XI: Forever Offline server",
-      "author": "XI: Forever Offline (based on Phoenix / LandSandBoat)",
+      "name": "XIRPG server",
+      "author": "XIRPG (based on Phoenix / LandSandBoat)",
       "license": "GPL-3.0",
       "homepage": "https://github.com/Hurami89/xi-forever-offline-server",
       "required": true,
@@ -255,7 +255,7 @@
       "license": "GPL-3.0",
       "homepage": "https://github.com/wildcabbagepatch/FFXIPort",
       "into": "ashita",
-      "note": "Made for XI: Forever Offline: a teleport window (/port) for the Home Points, Survival Guides, gate crystals and Runic Portals you have unlocked (1,000 gil or conquest points; free within a city). The server part ships with the server. Installed switched off (ADDONS > Addons to load it); it follows the Fast travel switch.",
+      "note": "Made for XIRPG: a teleport window (/port) for the Home Points, Survival Guides, gate crystals and Runic Portals you have unlocked (1,000 gil or conquest points; free within a city). The server part ships with the server. Installed switched off (ADDONS > Addons to load it); it follows the Fast travel switch.",
       "source": {
         "type": "github_release",
         "repo": "wildcabbagepatch/FFXIPort",

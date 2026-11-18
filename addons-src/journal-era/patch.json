@@ -1,5 +1,5 @@
 {
-  "_about": "XI: Forever Offline's era edits for Journal (Kxteel, MIT, Nexus Mods FFXI mod 44): hide missions and quests after Treasures of Aht Urhgan. Applied by the launcher (Downloads tab > Journal) after you install Journal: each 'find' must appear exactly once, else nothing is changed. era.lua (ours) goes to addons/journal/data/era.lua.",
+  "_about": "XIRPG's era edits for Journal (Kxteel, MIT, Nexus Mods FFXI mod 44): hide missions and quests after Treasures of Aht Urhgan. Applied by the launcher (Downloads tab > Journal) after you install Journal: each 'find' must appear exactly once, else nothing is changed. era.lua (ours) goes to addons/journal/data/era.lua.",
   "made_for": "0.3.4",
   "copy": [
     [

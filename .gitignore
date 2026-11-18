@@ -1,4 +1,4 @@
-# XI: Forever Offline: allow-list.
+# XIRPG: allow-list.
 # Everything in this folder is ignored unless it is listed below, so passwords,
 # ROMs, game files, backups and logs can't be added by accident.
 /*
@@ -156,7 +156,7 @@ config.json
 desktop.ini
 Thumbs.db
 # the Linux launcher (built by build_release.sh) and what a Linux install makes in the kit folder
-/XI-Forever-Offline
+/XIRPG
 /proton/
 /prefix/
 /ollama/

@@ -4,8 +4,8 @@ xi-forever-offline-<version>-linux-x64.tar.gz (+ SHA256SUMS-linux.txt; build_rel
     python package_kit.py v0.1.1            (build the exe first: .\\build_release.ps1)
     python package_kit.py v0.1.1 --list     only shows what would go in
 
-Inside is one folder, "XI Forever Offline", with every file git tracks in this kit (the launcher's scripts, assets,
-addons, data, tests) and XI Forever Offline.exe. A player unzips it anywhere and runs the exe; the first-run setup
+Inside is one folder, "XIRPG", with every file git tracks in this kit (the launcher's scripts, assets,
+addons, data, tests) and XIRPG.exe. A player unzips it anywhere and runs the exe; the first-run setup
 does the rest. Never inside: anything git does not track (config.json, rates.json, your squad mates, backups, logs, ROMs,
 downloads, dist\\ and build\\).
 """
@@ -20,10 +20,10 @@ import time
 import zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-EXE = "XI Forever Offline.exe"
-LINUX_EXE = "XI-Forever-Offline"
-TOP = "XI Forever Offline/"
-LINUX_ONE_CLICK = "XI-Forever-Offline-Linux.tar.gz"     # same file under a fixed name: .../releases/latest/download/<this>
+EXE = "XIRPG.exe"
+LINUX_EXE = "XIRPG"
+TOP = "XIRPG/"
+LINUX_ONE_CLICK = "XIRPG-Linux.tar.gz"     # same file under a fixed name: .../releases/latest/download/<this>
 
 
 def tracked():
@@ -77,7 +77,7 @@ def main(argv):
         for rel in files:
             archive.write(os.path.join(HERE, *rel.split("/")), TOP + rel)
         archive.write(exe, TOP + EXE)
-        archive.writestr(TOP + "VERSION.txt", f"XI: Forever Offline {args.version}\ncommit {commit}\n")
+        archive.writestr(TOP + "VERSION.txt", f"XIRPG {args.version}\ncommit {commit}\n")
     digest = hashlib.sha256()
     with open(target, "rb") as handle:
         for block in iter(lambda: handle.read(1 << 20), b""):
@@ -104,7 +104,7 @@ def write_linux(args, files, exe, commit):
         for rel in files:
             archive.add(os.path.join(HERE, *rel.split("/")), TOP + rel, recursive=False, filter=clean)
         archive.add(exe, TOP + LINUX_EXE, recursive=False, filter=clean)
-        data = f"XI: Forever Offline {args.version}\ncommit {commit}\n".encode()
+        data = f"XIRPG {args.version}\ncommit {commit}\n".encode()
         info = tarfile.TarInfo(TOP + "VERSION.txt")
         info.size, info.mtime, info.mode = len(data), int(time.time()), 0o644
         archive.addfile(info, io.BytesIO(data))

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Builds "XI-Forever-Offline" in this folder: the Linux launcher with Python inside, so players need no Python.
+# Builds "XIRPG" in this folder: the Linux launcher with Python inside, so players need no Python.
 # The Linux twin of build_release.ps1 (same contents: the kit's scripts stay .py files next to it and run through it,
-# "XI-Forever-Offline --run script.py"). Used by the GitHub workflow .github/workflows/linux-release.yml; it also works
+# "XIRPG --run script.py"). Used by the GitHub workflow .github/workflows/linux-release.yml; it also works
 # on any Linux PC with Python 3.10+, Tk and the MariaDB client library (Ubuntu/Debian: python3-tk libmariadb-dev).
 #   ./build_release.sh            build
 #   PYTHON=python3.12 ./build_release.sh
@@ -24,7 +24,7 @@ hidden=("${std[@]}" bcrypt certifi mariadb PIL.Image PIL.ImageTk PIL._tkinter_fi
         launcher_core launcher_squad launcher_rules launcher_icons launcher_personality
         launcher_thirdparty launcher_setup launcher_game launcher_client launcher_update launcher_linux
         launcher_passport launcher_coop launcher_coop_gui)
-opts=(--noconfirm --onefile --name XI-Forever-Offline
+opts=(--noconfirm --onefile --name XIRPG
       --distpath "$PWD" --workpath "$PWD/build/pyinstaller" --specpath "$PWD/build/pyinstaller"
       --collect-all mariadb --collect-data certifi)
 for m in "${hidden[@]}"; do opts+=(--hidden-import "$m"); done
@@ -32,7 +32,7 @@ for m in "${hidden[@]}"; do opts+=(--hidden-import "$m"); done
 "$py" -m PyInstaller "${opts[@]}" launcher_gui.pyw
 
 echo
-echo "Built: $PWD/XI-Forever-Offline"
+echo "Built: $PWD/XIRPG"
 echo "Quick check (runs the personality tests through it):"
-chmod +x XI-Forever-Offline
-./XI-Forever-Offline --run "$PWD/dev/personality-tests/test_personality.py"
+chmod +x XIRPG
+./XIRPG --run "$PWD/dev/personality-tests/test_personality.py"
