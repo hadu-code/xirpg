@@ -1,6 +1,6 @@
 # XIRPG
 
-![XIRPG](assets/promo/hero-1920x1080.jpg)
+![XIRPG](assets/press/xirpg_1_night__center.png)
 
 > A fork of [XI: Forever Offline](https://github.com/Hurami89/xi-forever-offline) by Hurami89 (GNU GPL v3). No releases of this fork are published yet: build it yourself with `build_release.ps1` (see `RELEASING.md`).
 
